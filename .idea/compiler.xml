@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LAB4_CNN" />
+        <module name="Image_Recognition_in_Java_Encog" />
       </profile>
     </annotationProcessing>
   </component>
