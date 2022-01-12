@@ -9,8 +9,8 @@ Input: image:src/main/img/digits/6.jpg, identity:6
 Input: image:src/main/img/digits/7.jpg, identity:7
 Input: image:src/main/img/digits/8.jpg, identity:8
 Input: image:src/main/img/digits/9.jpg, identity:9
-Network: hidden1:100, hidden2:0
-Train: Mode:console, Minutes:1, StrategyError:0.25, StrategyCycles:50
+Network: hidden1:400, hidden2:300
+Train: Mode:console, Minutes:5, StrategyError:0.25, StrategyCycles:50
 Recognize: image:src/main/img/digits/9.jpg
 Recognize: image:src/main/img/digits/1.jpg
 Recognize: image:src/main/img/digits/3.jpg

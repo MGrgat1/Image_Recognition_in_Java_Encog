@@ -27,6 +27,7 @@ import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;
 import org.encog.ml.train.strategy.ResetStrategy;
 import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 import org.encog.platformspecific.j2se.TrainingDialog;
 import org.encog.platformspecific.j2se.data.image.ImageMLData;
