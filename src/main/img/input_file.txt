@@ -1,0 +1,18 @@
+CreateTraining: width:16,height:16,type:RGB
+Input: image:src/main/img/digits/0.jpg, identity:0
+Input: image:src/main/img/digits/1.jpg, identity:1
+Input: image:src/main/img/digits/2.jpg, identity:2
+Input: image:src/main/img/digits/3.jpg, identity:3
+Input: image:src/main/img/digits/4.jpg, identity:4
+Input: image:src/main/img/digits/5.jpg, identity:5
+Input: image:src/main/img/digits/6.jpg, identity:6
+Input: image:src/main/img/digits/7.jpg, identity:7
+Input: image:src/main/img/digits/8.jpg, identity:8
+Input: image:src/main/img/digits/9.jpg, identity:9
+Network: hidden1:100, hidden2:0
+Train: Mode:console, Minutes:1, StrategyError:0.25, StrategyCycles:50
+Recognize: image:src/main/img/digits/9.jpg
+Recognize: image:src/main/img/digits/1.jpg
+Recognize: image:src/main/img/digits/3.jpg
+Recognize: image:src/main/img/digits/4.jpg
+Recognize: image:src/main/img/digits/5.jpg
