@@ -220,8 +220,8 @@ public class ImageNeuralNetwork {
 			System.out.println("[INFO] Reading the input image from the training pair");
 			System.out.println("Training pair: " + pair);
 			final Image img = ImageIO.read(pair.getFile());
-			final ImageMLData data = new ImageMLData(img);
-			this.training.add(data, expectedOutput);
+			final ImageMLData imageMLData = new ImageMLData(img);
+			this.training.add(imageMLData, expectedOutput);
 		}
 
 		final String strHidden1 = fetchArg("hidden1");
@@ -287,14 +287,23 @@ public class ImageNeuralNetwork {
 	 */
 	public void processRecognition() throws IOException {
 		System.out.println("Starting the process of recognition");
-		final String filename = fetchArg("image");
+		final String filename = fetchArg("image");				//this will be an image of a phone number
 		final File file = new File(filename);
 		final Image image = ImageIO.read(file);
+		final int numberOfSymbols = 12;		//the phone number will have 12 symbols
+
 		final ImageMLData input = new ImageMLData(image);
 		input.downsample(this.downsample, false, this.downsampleHeight,
 				this.downsampleWidth, 1, -1);
 		final int winner = this.network.winner(input);
+
+		String guessedDigit = this.neuronToIdentityMap.get(winner);
 		System.out.println("What is: " + filename + ", it seems to be: "
-				+ this.neuronToIdentityMap.get(winner));
+				+ guessedDigit);
+
+
+
+
+
 	}
 }
