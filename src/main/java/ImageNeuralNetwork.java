@@ -308,7 +308,7 @@ public class ImageNeuralNetwork {
 			int numberOfSlices = 12;
 			for (int i = 0; i < numberOfSlices; i++) {
 
-				System.out.println("[INFO] Reading slice " + i);
+				//System.out.println("[INFO] Reading slice " + i);
 				//slides across the phone number and gets digits and other symbols as subimages
 				final BufferedImage slice = image.getSubimage(i * 60, 0, 60, 100);
 
@@ -318,7 +318,7 @@ public class ImageNeuralNetwork {
 				final int winner = this.network.winner(input);
 				String guessedDigit = this.neuronToIdentityMap.get(winner);
 				guessedPhoneNumber.add(guessedDigit);
-				System.out.println("Guessed digit: " + guessedDigit);
+				//System.out.println("Guessed digit: " + guessedDigit);
 			}
 
 			System.out.println("-----------------------------");
