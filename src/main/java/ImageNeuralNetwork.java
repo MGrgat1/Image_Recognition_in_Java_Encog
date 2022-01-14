@@ -321,10 +321,10 @@ public class ImageNeuralNetwork {
 				//System.out.println("Guessed digit: " + guessedDigit);
 			}
 
-			System.out.println("-----------------------------");
-			System.out.println("THE SOLUTION IS:");
+			//System.out.println("-----------------------------");
+			//System.out.println("THE SOLUTION IS:");
 			System.out.println(guessedPhoneNumber);
-			System.out.println("-----------------------------");
+			//System.out.println("-----------------------------");
 		}
 
 	}

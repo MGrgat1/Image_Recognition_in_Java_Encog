@@ -11,6 +11,6 @@ Input: location:src/main/img/digits/training_digits/8, identity:8
 Input: location:src/main/img/digits/training_digits/9, identity:9
 Input: location:src/main/img/digits/training_digits/dash, identity:-
 Input: location:src/main/img/digits/training_digits/slash, identity:/
-Network: hidden1:600, hidden2:600
-Train: Mode:console, Minutes:3, StrategyError:0.25, StrategyCycles:50
+Network: hidden1:100, hidden2:100
+Train: Mode:console, Minutes:1, StrategyError:0.25, StrategyCycles:50
 Recognize: location:src/main/img/digits/test_phone_numbers/phone_numbers
