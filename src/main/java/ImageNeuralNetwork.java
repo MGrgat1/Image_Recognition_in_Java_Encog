@@ -308,6 +308,7 @@ public class ImageNeuralNetwork {
 			int numberOfSlices = 12;
 			for (int i = 0; i < numberOfSlices; i++) {
 
+				System.out.println("[INFO] Reading slice " + i);
 				//slides across the phone number and gets digits and other symbols as subimages
 				final BufferedImage slice = image.getSubimage(i * 60, 0, 60, 100);
 
