@@ -38,8 +38,12 @@ import org.encog.util.downsample.SimpleIntensityDownsample;
 import org.encog.util.simple.EncogUtility;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -180,17 +184,21 @@ public class ImageNeuralNetwork {
 	 * @throws IOException
 	 */
 	public void processInput() throws IOException {
-		final String image = fetchArg("image");
+		final String location = fetchArg("location");
 		final String identity = fetchArg("identity");
 
 		final int outputNeuronValue = assignOutputNeuron(identity);
-		final File file = new File(image);
 
-		TrainingPair trainingPair = new TrainingPair(file, outputNeuronValue);
+		//gets all the files from the folder (they're assumed to all be images), and assigns them to an output neuron
+		File currentDir = new File(location);
+		File[] files = currentDir.listFiles();
+		for (File file : files) {
+			TrainingPair trainingPair = new TrainingPair(file, outputNeuronValue);
+			this.imageList.add(trainingPair);
+			System.out.println("[INFO] Added a new training pair: " + trainingPair);
+		}
 
-		this.imageList.add(trainingPair);
 
-		System.out.println("[INFO] Added a new training pair: " + trainingPair);
 	}
 
 	/**
@@ -286,24 +294,37 @@ public class ImageNeuralNetwork {
 	 * @throws IOException
 	 */
 	public void processRecognition() throws IOException {
-		System.out.println("Starting the process of recognition");
-		final String filename = fetchArg("image");				//this will be an image of a phone number
-		final File file = new File(filename);
-		final Image image = ImageIO.read(file);
-		final int numberOfSymbols = 12;		//the phone number will have 12 symbols
+		final String location = fetchArg("location");				//this will be an image of a phone number
 
-		final ImageMLData input = new ImageMLData(image);
-		input.downsample(this.downsample, false, this.downsampleHeight,
-				this.downsampleWidth, 1, -1);
-		final int winner = this.network.winner(input);
+		File currentDir = new File(location);
+		File[] files = currentDir.listFiles();
+		for (File file : files) {
 
-		String guessedDigit = this.neuronToIdentityMap.get(winner);
-		System.out.println("What is: " + filename + ", it seems to be: "
-				+ guessedDigit);
+			System.out.println("[INFO] Recognizing the file: " + file);
 
+			BufferedImage image = ImageIO.read(file);
 
+			List<String> guessedPhoneNumber = new ArrayList<>();
+			int numberOfSlices = 12;
+			for (int i = 0; i < numberOfSlices; i++) {
 
+				//slides across the phone number and gets digits and other symbols as subimages
+				final BufferedImage slice = image.getSubimage(i * 60, 0, 60, 100);
 
+				final ImageMLData input = new ImageMLData(slice);
+				input.downsample(this.downsample, false, this.downsampleHeight,
+						this.downsampleWidth, 1, -1);
+				final int winner = this.network.winner(input);
+				String guessedDigit = this.neuronToIdentityMap.get(winner);
+				guessedPhoneNumber.add(guessedDigit);
+				System.out.println("Guessed digit: " + guessedDigit);
+			}
+
+			System.out.println("-----------------------------");
+			System.out.println("THE SOLUTION IS:");
+			System.out.println(guessedPhoneNumber);
+			System.out.println("-----------------------------");
+		}
 
 	}
 }
